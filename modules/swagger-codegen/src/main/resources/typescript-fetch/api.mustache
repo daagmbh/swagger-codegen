@@ -101,7 +101,7 @@ export const {{classname}}FetchParamCreator = function (configuration?: Configur
             const path = `{{{path}}}`{{#pathParams}}
                 .replace(`{${"{{baseName}}"}}`, encodeURIComponent(String({{paramName}}))){{/pathParams}};
             const urlObj = url.parse(path, true);
-            const requestOptions = Object.assign({ method: '{{httpMethod}}' }, options);
+            const requestOptions = Object.assign({ method: '{{httpMethod}}', credentials: 'same-origin' }, options);
             const headerParameter = {} as any;
             const queryParameter = {} as any;
     {{#hasFormParams}}
