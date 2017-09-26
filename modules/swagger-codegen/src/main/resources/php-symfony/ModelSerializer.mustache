@@ -84,6 +84,14 @@ class ModelSerializer
             }, $data);
         }
 
+        if ($data instanceof \stdClass) {
+            foreach ($data as $key => $value) {
+                $data->$key = $this->normalize($value, $format);
+            }
+
+            return $data;
+        }
+
         if ($data instanceof \DateTime) {
             return ($format === 'date') ? $data->format('Y-m-d') : $data->format(\DateTime::ATOM);
         }

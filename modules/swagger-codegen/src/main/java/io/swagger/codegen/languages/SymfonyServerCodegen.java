@@ -333,7 +333,11 @@ public class SymfonyServerCodegen extends AbstractPhpCodegen implements CodegenC
                 final boolean isScalarType = typeMapping.containsValue(importType);
                 var.vendorExtensions.put("x-fullType", var.datatype);
                 if (!isScalarType) {
-                    if (dataType.startsWith("maparray") || dataType.endsWith("[]")) {
+                    if (dataType.startsWith("maparray")) {
+                        var.vendorExtensions.put("x-typeAnnotation", "stdClass");
+                        imports.add("stdClass");
+                    }
+                    else if (dataType.endsWith("[]")) {
                         var.vendorExtensions.put("x-typeAnnotation", "array");
                     } else {
                         var.vendorExtensions.put("x-typeAnnotation", dataType);
