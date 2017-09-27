@@ -137,6 +137,11 @@ class ModelSerializer
             }, $data);
         }
 
+        // Denormalize object
+        if (substr($class, 0, 8) === 'maparray') {
+            return (object) $data;
+        }
+
         if (!class_exists($class)) {
             return $data;
         }
