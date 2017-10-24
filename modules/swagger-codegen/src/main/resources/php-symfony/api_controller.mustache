@@ -186,6 +186,7 @@ class {{controllerName}} extends Controller
         {{/vendorExtensions.x-symfonyExceptionSimple}}
         {{/responses}}
         } catch (Exception $fallthrough) {
+            $this->container->get('logger')->error($fallthrough->getMessage(), ['e' => $fallthrough]);
             return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
         }
     }
